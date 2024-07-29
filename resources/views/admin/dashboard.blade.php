@@ -22,7 +22,7 @@
             <div class="col-lg-4 col-6">							
                 <div class="small-box card">
                     <div class="inner text-center">
-                        <h3 class="{{ $teamMemberCount->count() == 1 ? 'text-dark' : 'text-green' }}">{{ $teamMemberCount->count("id")}}</h3>
+                        <h3 class="{{ $teamMemberCount == 1 ? 'text-dark' : 'text-green' }}">{{ $teamMemberCount }}</h3>                      
                         <p>Total Team Member</p>
                     </div>
                     <div class="icon">
@@ -64,7 +64,20 @@
         @endsection
 
         @section('costomJs')
-         <script>
-            
+         <script> 
+        // // JavaScript to dynamically update the badge
+        // function updateNotificationBadge(count) {
+        //     const badge = document.getElementById('notification-badge');
+        //     if (count > 0) {
+        //         badge.textContent = count;
+        //         badge.style.display = 'inline'; // Show the badge
+        //     } else {
+        //         badge.style.display = 'none'; // Hide the badge
+        //     }
+        // }
+
+        // // Example usage
+        // const teamMemberCount = <?php echo json_encode($teamMemberCount); ?>; // php code is here 
+        // updateNotificationBadge(teamMemberCount);
          </script>
         @endsection

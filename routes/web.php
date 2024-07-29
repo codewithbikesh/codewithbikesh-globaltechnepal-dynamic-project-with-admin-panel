@@ -9,12 +9,14 @@ use App\Http\Controllers\admin\ProductDetailsController As AdminProductDetailsCo
 use App\Http\Controllers\admin\OurTeamController As AdminOurTeamController; 
 use App\Http\Controllers\admin\ClientController As AdminClientController; 
 use App\Http\Controllers\admin\ContactController As AdminContactController; 
+use App\Http\Controllers\admin\CareerController As AdminCareerController; 
+use App\Http\Controllers\frontend\IndexController As FrontendIndexController; 
 
 use Illuminate\Support\Facades\Route;
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
 
 Route::group(['prefix' => 'account'] , function(){
  
@@ -88,6 +90,24 @@ Route::get('clients/{id}/delete',[AdminClientController::class,'destroy'])->name
 // Contact Route is here 
 Route::get('contact',[AdminContactController::class,'index'])->name('admin.contact.index');
 Route::get('contact/{id}/delete',[AdminContactController::class,'destroy'])->name('admin.contact.delete');
+
+// Career Route is here 
+// Career Route is here 
+Route::get('career',[AdminCareerController::class,'index'])->name('admin.career.index');
+Route::get('career/create',[AdminCareerController::class,'create'])->name('admin.career.create');
+Route::post('career/store',[AdminCareerController::class,'store'])->name('admin.career.store');
+Route::get('career/{id}/edit',[AdminCareerController::class,'edit'])->name('admin.career.edit');
+Route::put('career/{id}/update',[AdminCareerController::class,'update'])->name('admin.career.update');
+Route::get('career/{id}/delete',[AdminCareerController::class,'destroy'])->name('admin.career.delete');
+
 });
 
 });
+
+
+
+
+// For Frontend route code from here 
+// For Frontend route code from here 
+Route::get('/',[FrontendIndexController::class,'index'])->name('frontend.index');
+

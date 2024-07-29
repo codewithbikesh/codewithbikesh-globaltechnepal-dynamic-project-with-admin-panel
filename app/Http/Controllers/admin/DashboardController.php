@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function dashboard(){
-        $teamMemberCount  = OurTeam::get();
+        $teamMemberCount  = OurTeam::count();
         $contactCount = Contact::count();
         $clientCount = Clients::count();
           return view("admin.dashboard",compact("teamMemberCount","contactCount","clientCount"));
