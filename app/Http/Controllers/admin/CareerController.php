@@ -10,9 +10,22 @@ class CareerController extends Controller
 {
     // show the list of data in table 
     // show the list of data in table 
-        public function index(){
-            $careers = Career::get();
-            return view("admin.career.index",compact('careers'));
+        public function index(Request $request){
+            $careers = Career::where('is_active', 1)->latest();
+            $inactiveCareers = Career::where('is_active', 0)->get(); 
+            if(!empty($request->get('keyword'))){
+                $keyword  = $request->get('keyword');
+                $careers = $careers->where('jobCategory', 'like','%'.$keyword.'%')
+                ->orWhere('position', 'like','%'.$keyword.'%')
+                ->orWhere('totalPositions', 'like','%'.$keyword.'%')
+                ->orWhere('qualification', 'like','%'.$keyword.'%')
+                ->orWhere('experience', 'like','%'.$keyword.'%')
+                ->orWhere('gender', 'like','%'.$keyword.'%')
+                ->orWhere('lastDate', 'like','%'.$keyword.'%')
+                ->orWhere('description', 'like','%'.$keyword.'%');
+            }
+            $careers = $careers->paginate(5);
+            return view("admin.career.index",compact('careers','inactiveCareers'));
         }
 
     // create new career apportunative 
