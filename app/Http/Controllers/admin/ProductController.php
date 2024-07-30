@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
+use App\Models\ProductDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -104,12 +105,38 @@ class ProductController extends Controller
   }
 
   // Delete the data from database 
-  public function destroy($id){
-    $product = ProductCategory::findOrFail($id);
-   if(File::exists(public_path($product->image))){
-    File::delete($product->image);
-   }
-    $product->delete();
-    return redirect()->route('admin.product.index')->with('success','Products Category Deleted successfully');
+//   public function destroy($id){
+//     $product = ProductCategory::findOrFail($id);
+//     $productDetails = ProductDetails::find($cat_id);
+//    if(File::exists(public_path($product->image))){
+//     File::delete($product->image);
+//    }
+//     $product->delete();
+//     return redirect()->route('admin.product.index')->with('success','Products Category Deleted successfully');
+// }
+
+public function destroy($id) {
+  // Find the product category by its ID
+  $product = ProductCategory::findOrFail($id);
+  
+  // Check if there are any ProductDetails records associated with this product category
+  $productDetails = ProductDetails::where('cat_id', $id)->first();
+
+  // If there are associated ProductDetails records, do not delete the product category
+  if ($productDetails) {
+      return redirect()->route('admin.product.index')->with('error', 'Cannot delete Product Category. There are associated Product Details.');
+  }
+  
+  // Check if the image file exists and delete it
+  if (File::exists(public_path($product->image))) {
+      File::delete(public_path($product->image));
+  }
+  
+  // Delete the product category
+  $product->delete();
+
+  // Redirect with success message
+  return redirect()->route('admin.product.index')->with('success', 'Product Category deleted successfully');
 }
+
 }
