@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\OurTeamController As AdminOurTeamController;
 use App\Http\Controllers\admin\ClientController As AdminClientController; 
 use App\Http\Controllers\admin\ContactController As AdminContactController; 
 use App\Http\Controllers\admin\CareerController As AdminCareerController; 
+use App\Http\Controllers\admin\JobApplicationsController As AdminJobApplicationsController; 
 use App\Http\Controllers\frontend\IndexController As FrontendIndexController; 
 
 use Illuminate\Support\Facades\Route;
@@ -100,6 +101,11 @@ Route::get('career/{id}/edit',[AdminCareerController::class,'edit'])->name('admi
 Route::put('career/{id}/update',[AdminCareerController::class,'update'])->name('admin.career.update');
 Route::get('career/{id}/delete',[AdminCareerController::class,'destroy'])->name('admin.career.delete');
 
+
+//   Route Job Applications is here 
+//   Route Job Applications is here 
+   Route::get('job-applications',[AdminJobApplicationsController::class,'index'])->name('admin.job-applications.index');
+   Route::get('job-applications/{id}/delete',[AdminJobApplicationsController::class,'destroy'])->name('admin.job-applications.delete');
 });
 
 });

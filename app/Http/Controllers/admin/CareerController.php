@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Career;
+use App\Models\JobApplications;
 use Illuminate\Http\Request;
 
 class CareerController extends Controller
@@ -110,18 +111,38 @@ class CareerController extends Controller
     
     // Detele the career information from the database through this code 
     // Detele the career information from the database through this code 
-    public function destroy($id){
-        $careers = Career::findOrFail($id);
-        $careers->delete();
-        return redirect()->route('admin.career.index')->with('success','Career deleted successfully.');
-    }
+    // public function destroy($id){
+    //     $careers = Career::findOrFail($id);
+    //     $careers->delete();
+    //     return redirect()->route('admin.career.index')->with('success','Career deleted successfully.');
+    // }
+
+    public function destroy($id) {
+        // Find the careers category by its ID
+        $career = Career::findOrFail($id);
+        
+        // Check if there are any jobApplications records associated with this product category
+        $jobApplications = JobApplications::where('career_id', $id)->first();
+      
+        // If there are associated ProductDetails records, do not delete the product category
+        if ($jobApplications) {
+            return redirect()->route('admin.career.index')->with('error', 'Cannot delete Career. There are associated Job Applications.');
+        }
+        
+        // Delete the product category
+        $career->delete();
+      
+        // Redirect with success message
+        return redirect()->route('admin.career.index')->with('success', 'Career deleted successfully');
+      }
+      
     
     // detele the career information if the given date has been expired 
     // detele the career information if the given date has been expired 
-    public function deleteExpiredRecords()
-    {
-        Career::deleteRecordsWithCurrentDate();
-        return response()->json(['message' => 'Expired records deleted successfully.']);
-    }
+    // public function deleteExpiredRecords()
+    // {
+    //     Career::deleteRecordsWithCurrentDate();
+    //     return response()->json(['message' => 'Expired records deleted successfully.']);
+    // }
 
 }

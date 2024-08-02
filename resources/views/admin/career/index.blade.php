@@ -73,7 +73,7 @@
                                 <td>{{ $career->qualification }}</td>  
                                 <td>{{ $career->experience }}</td>  
                                 <td>{{ $career->gender }}</td>  
-                                <td>{{ $career->lastDate }}</td>  
+                                <td class="{{ $career->is_active == 1 ? 'text-green' : '' }}">{{ $career->lastDate }}</td>  
                                 <td>{!! html_entity_decode($career->description) !!}</td>
                                 <td>
                                  @if ($career->is_active == 1)
@@ -123,7 +123,7 @@
     {{-- career expired  --}}
     <section class="expiredCareer">
         <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 1271px;">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalToggleLabel">Career Expired</h5>
@@ -161,7 +161,7 @@
                                     <td>{{ $career->qualification }}</td>  
                                     <td>{{ $career->experience }}</td>  
                                     <td>{{ $career->gender }}</td>  
-                                    <td>{{ $career->lastDate }}</td>  
+                                    <td class="{{ $career->is_active == 0 ? 'text-red' : '' }}">{{ $career->lastDate }}</td>  
                                     <td>{!! html_entity_decode($career->description) !!}</td>
                                     <td>
                                      @if ($career->is_active == 1)

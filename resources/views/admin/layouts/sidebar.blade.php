@@ -74,6 +74,12 @@
                         <i class="nav-icon  fa fa-tasks"></i>
                         <p>Career</p>
                     </a>
+                </li>	
+                <li class="nav-item">
+                    <a href="{{ route('admin.job-applications.index') }}" class="nav-link">
+                        <i class="nav-icon  fa fa-id-card"></i>
+                        <p>Job Applications</p>
+                    </a>
                 </li>							
             </ul>
         </nav>
