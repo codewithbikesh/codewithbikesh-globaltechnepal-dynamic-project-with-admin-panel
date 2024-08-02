@@ -8,6 +8,7 @@ use App\Http\Controllers\api\OurTeamController as ApiOurTeamController;
 use App\Http\Controllers\api\ClientController as ApiClientController; 
 use App\Http\Controllers\api\CareerController as ApiCareerController; 
 use App\Http\Controllers\api\JobApplicationsController as ApiJobApplicationsController; 
+use App\Http\Controllers\api\ContactController as ApiContactController; 
 // Uncomment and configure these routes if needed
 
 // Route::get('/user', function (Request $request) {
@@ -22,4 +23,5 @@ Route::get('/ourteams', [ApiOurTeamController::class, 'index']);
 Route::get('/clients', [ApiClientController::class, 'index']);
 Route::get('/careers', [ApiCareerController::class, 'index']);
 Route::post('/job-applications',[ApiJobApplicationsController::class,'store']);
+Route::post('/contact-us',[ApiContactController::class,'store']);
 
